@@ -25,14 +25,4 @@ spring:
   h2:
     console:
       enabled: true
-
-
-
-
-
-    #database-platform: org.hibernate.dialect.MySQLDialect
-  #data:
-   # mongodb:
-    #  host: localhost
-     # port: 27017
-      #database: stock
+      
