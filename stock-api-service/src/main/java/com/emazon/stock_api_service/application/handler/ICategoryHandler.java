@@ -10,4 +10,5 @@ public interface ICategoryHandler {
     CategoryResponse getCategoryResponseById(Long id);
     CategoryResponse getCategoryResponseByName(String id);
     List<CategoryResponse> getCategoryResponses(Boolean ascendingOrder);
+    void updateCategory(CategoryRequest categoryRequest);
 }

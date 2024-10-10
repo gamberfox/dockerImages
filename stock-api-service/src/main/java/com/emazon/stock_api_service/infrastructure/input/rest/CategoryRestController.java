@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_CREATED;
+import static com.emazon.stock_api_service.util.CategoryConstants.*;
 
 @RestController
 @RequestMapping("/category")
@@ -53,5 +53,14 @@ public class    CategoryRestController {
         List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<Map<String,Object>> updateCategory(@RequestBody CategoryRequest categoryRequest) {
+        categoryHandler.updateCategory(categoryRequest);
+        RestResponse response= new RestResponse(CATEGORY_UPDATED,
+                categoryRequest);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
     }
 }
