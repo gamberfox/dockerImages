@@ -29,6 +29,11 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public void createCategory(Category category) {
         this.validate(category);
+        if(Boolean.TRUE.equals(nameExists(category.getName()))) {
+            List<String> errorList=new ArrayList<>();
+            errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
+            throw new CategoryUseCaseException(errorList);
+        }
         this.categoryPersistencePort.createCategory(category);
     }
 
@@ -53,11 +58,27 @@ public class CategoryUseCase implements ICategoryServicePort {
         sortCategories(categories, ascendingOrder);
         return categories;
     }
+
+    @Override
+    public void updateCategory(Category category) {
+        this.validate(category);
+        if(Boolean.TRUE.equals(nameExists(category.getName()))) {
+            Category auxCategory=this
+                    .categoryPersistencePort.getCategoryById(category.getId());
+            if(!category.getName().equals(auxCategory.getName())) {
+            List<String> errorList=new ArrayList<>();
+            errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
+            throw new CategoryUseCaseException(errorList);
+            }
+        }
+        this.categoryPersistencePort.updateCategory(category);
+    }
+
     @Override
     public void validate(Category category) {
         List<String> errorList=new ArrayList<>();
-        if(Boolean.TRUE.equals(nameExists(category.getName()))) {
-            errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
+        if(category.getId()==null){
+            category.setId(0L);
         }
         if(category.getName().length()>MAXIMUM_CATEGORY_NAME_LENGTH){
             errorList.add(CATEGORY_NAME_TOO_LONG);
