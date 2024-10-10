@@ -49,4 +49,10 @@ public class CategoryHandler implements ICategoryHandler{
                 .map(categoryResponseMapper::toCategoryResponse)
                 .toList();
     }
+
+    @Override
+    public void updateCategory(CategoryRequest categoryRequest) {
+        Category category= categoryRequestMapper.toCategory(categoryRequest);
+        categoryServicePort.updateCategory(category);
+    }
 }

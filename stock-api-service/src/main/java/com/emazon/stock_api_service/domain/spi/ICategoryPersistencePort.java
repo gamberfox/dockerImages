@@ -10,4 +10,5 @@ public interface ICategoryPersistencePort {
     boolean categoryNameExists(String categoryName);
     boolean categoryIdExists(Long id);
     List<Category> getCategories();
+    void updateCategory(Category category);
 }

@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.emazon.stock_api_service.util.CategoryConstants.*;
 
 @RestController
 @RequestMapping("/category")
@@ -20,32 +23,44 @@ public class    CategoryRestController {
     @PostMapping("/")
     //we'll return a response entity of a  Void type because we're not interested
     //showing the user/client anything beyond the creation being made
-    public ResponseEntity<String> createCategory(@RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<Map<String,Object>> createCategory(@RequestBody CategoryRequest categoryRequest) {
         categoryHandler.createCategory(categoryRequest);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body("category created successfully");
+        CategoryResponse categoryResponse=categoryHandler.getCategoryResponseByName(categoryRequest.getName());
+        RestResponse response= new RestResponse(CATEGORY_CREATED,
+                categoryResponse);
+        return new ResponseEntity<>(response.getResponse(),
+        HttpStatus.CREATED);
     }
     @GetMapping("/aa")
     public ResponseEntity<String> responseTest(){
         return ResponseEntity.ok("another aa test");
     }
-//    @GetMapping("/{id}")
-//    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
-//        return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
-//    }
-//
-//    @GetMapping("/name/{name}")
-//    public ResponseEntity<CategoryResponse> getCategoryByName(@PathVariable(name="name") String name) {
-//        return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
-//    }
-//
-//    @GetMapping("/all/{ascendingOrder}")
-//    public ResponseEntity<Page<CategoryResponse>> getCategories(
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size,
-//            @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
-//        List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
-//        Pageable pageable = PageRequest.of(page, size);
-//        return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
-//    }
+    @GetMapping("/{id}")
+    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
+        return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
+    }
+
+    @GetMapping("/name/{name}")
+    public ResponseEntity<CategoryResponse> getCategoryByName(@PathVariable(name="name") String name) {
+        return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
+    }
+
+    @GetMapping("/all/{ascendingOrder}")
+    public ResponseEntity<Page<CategoryResponse>> getCategories(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
+        List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
+        Pageable pageable = PageRequest.of(page, size);
+        return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<Map<String,Object>> updateCategory(@RequestBody CategoryRequest categoryRequest) {
+        categoryHandler.updateCategory(categoryRequest);
+        RestResponse response= new RestResponse(CATEGORY_UPDATED,
+                categoryRequest);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
+    }
 }
