@@ -35,23 +35,26 @@ public class    CategoryRestController {
     public ResponseEntity<String> responseTest(){
         return ResponseEntity.ok("another aa test");
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
+    @GetMapping("/")
+    public ResponseEntity<CategoryResponse> getCategoryById(
+            @RequestParam(name="id") Long id) {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<CategoryResponse> getCategoryByName(@PathVariable(name="name") String name) {
+    @GetMapping("/name")
+    public ResponseEntity<CategoryResponse> getCategoryByName(
+            @RequestParam(defaultValue="") String name) {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
     }
 
-    @GetMapping("/all/{ascendingOrder}")
+    @GetMapping("/all")
     public ResponseEntity<Page<CategoryResponse>> getCategories(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
-            @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue="true") boolean ascendingOrder) {
         List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
-        Pageable pageable = PageRequest.of(page, size);
+//        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(0, categoryResponses.size());
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
     }
 
@@ -60,6 +63,16 @@ public class    CategoryRestController {
         categoryHandler.updateCategory(categoryRequest);
         RestResponse response= new RestResponse(CATEGORY_UPDATED,
                 categoryRequest);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
+    }
+    @DeleteMapping("/")
+    public ResponseEntity<Map<String,Object>> deleteCategory(
+            @RequestParam(defaultValue = "0") Long id
+    ) {
+        categoryHandler.deleteCategoryById(id);
+        RestResponse response= new RestResponse(CATEGORY_DELETED,
+                id);
         return new ResponseEntity<>(response.getResponse(),
                 HttpStatus.OK);
     }

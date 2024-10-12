@@ -11,4 +11,5 @@ public interface ICategoryPersistencePort {
     boolean categoryIdExists(Long id);
     List<Category> getCategories();
     void updateCategory(Category category);
+    void deleteCategoryById(Long id);
 }

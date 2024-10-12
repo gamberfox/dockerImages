@@ -11,4 +11,5 @@ public interface ICategoryServicePort {
     Category getCategoryByName(String name);
     List<Category> getCategories(Boolean ascendingOrder);
     void updateCategory(Category category);
+    void deleteCategoryById(Long id);
 }

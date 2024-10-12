@@ -5,6 +5,7 @@ public class BrandConstants {
         throw new IllegalStateException("Utility class: this class cannot be instantiated");
     }
     public static final String BRAND_CREATED = "The brand was successfully created";
+    public static final String CATEGORY_UPDATED = "The category was successfully updated";
     public static final String BRAND_NOT_FOUND = "The brand does not exist";
     public static final String BRAND_ID_OBLIGATORY = "you must include a brand id";
     public static final Integer MAXIMUM_BRAND_NAME_LENGTH=50;

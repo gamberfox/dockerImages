@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.emazon.stock_api_service.util.CategoryConstants.*;
+import static com.emazon.stock_api_service.util.GenericConstants.EMPTY_BODY;
 
 public class CategoryUseCase implements ICategoryServicePort {
     //@AutoWired is not recommended, if you want to do dependency injection,
@@ -28,6 +29,11 @@ public class CategoryUseCase implements ICategoryServicePort {
     //go through the domain, and what will be sent to the persistence
     @Override
     public void createCategory(Category category) {
+        if(category==null){
+            List<String> errorList=new ArrayList<>();
+            errorList.add(EMPTY_BODY);
+            throw new CategoryUseCaseException(errorList);
+        }
         this.validate(category);
         if(Boolean.TRUE.equals(nameExists(category.getName()))) {
             List<String> errorList=new ArrayList<>();
@@ -72,6 +78,16 @@ public class CategoryUseCase implements ICategoryServicePort {
             }
         }
         this.categoryPersistencePort.updateCategory(category);
+    }
+
+    @Override
+    public void deleteCategoryById(Long id) {
+        if(Boolean.FALSE.equals(idExists(id))) {
+            List<String> errorList=new ArrayList<>();
+            errorList.add(CATEGORY_NOT_FOUND);
+            throw new CategoryUseCaseException(errorList);
+        }
+        this.categoryPersistencePort.deleteCategoryById(id);
     }
 
     @Override
