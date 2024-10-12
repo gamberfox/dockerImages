@@ -46,11 +46,11 @@ public class    CategoryRestController {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
     }
 
-    @GetMapping("/all/{ascendingOrder}")
+    @GetMapping("/all/")
     public ResponseEntity<Page<CategoryResponse>> getCategories(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @PathVariable(name="ascendingOrder") boolean ascendingOrder) {
+            @RequestParam(defaultValue="true") boolean ascendingOrder) {
         List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
         Pageable pageable = PageRequest.of(page, size);
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
