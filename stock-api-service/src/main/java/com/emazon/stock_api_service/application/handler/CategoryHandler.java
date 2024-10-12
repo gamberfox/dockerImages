@@ -55,4 +55,9 @@ public class CategoryHandler implements ICategoryHandler{
         Category category= categoryRequestMapper.toCategory(categoryRequest);
         categoryServicePort.updateCategory(category);
     }
+
+    @Override
+    public void deleteCategoryById(Long id) {
+        categoryServicePort.deleteCategoryById(id);
+    }
 }
