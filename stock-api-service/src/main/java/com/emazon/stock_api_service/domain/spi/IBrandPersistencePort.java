@@ -11,4 +11,5 @@ public interface IBrandPersistencePort {
     boolean brandNameExists(String categoryName);
     boolean brandIdExists(Long id);
     List<Brand> getBrands();
+    void updateBrand(Brand brand);
 }

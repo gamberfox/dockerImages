@@ -2,13 +2,16 @@ package com.emazon.stock_api_service.domain.usecase;
 
 import com.emazon.stock_api_service.domain.api.IBrandServicePort;
 import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
+import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import com.emazon.stock_api_service.domain.model.Brand;
+import com.emazon.stock_api_service.domain.model.Category;
 import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 
 import java.util.ArrayList;
 import java.util.List;
 import static com.emazon.stock_api_service.util.BrandConstants.*;
+import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NAME_ALREADY_EXISTS;
 
 public class BrandUseCase implements IBrandServicePort {
     private final IBrandPersistencePort brandPersistencePort;
@@ -46,6 +49,21 @@ public class BrandUseCase implements IBrandServicePort {
         List<Brand> brands= brandPersistencePort.getBrands();
         sortBrands(brands,ascendingOrder);
         return brands;
+    }
+
+    @Override
+    public void updateBrand(Brand brand) {
+        validate(brand);
+        if(Boolean.TRUE.equals(nameExists(brand.getName()))) {
+            Brand auxBrand=this
+                    .brandPersistencePort.getBrandById(brand.getId());
+            if(!brand.getName().equals(auxBrand.getName())) {
+                List<String> errorList=new ArrayList<>();
+                errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
+                throw new BrandUseCaseException(errorList);
+            }
+        }
+        this.brandPersistencePort.updateBrand(brand);
     }
 
     @Override

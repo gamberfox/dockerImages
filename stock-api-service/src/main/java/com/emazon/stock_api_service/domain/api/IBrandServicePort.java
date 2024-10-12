@@ -10,4 +10,5 @@ public interface IBrandServicePort {
     Brand getBrandById(Long id);
     Brand getBrandByName(String name);
     List<Brand> getBrands(Boolean ascendingOrder);
+    void updateBrand(Brand brand);
 }
