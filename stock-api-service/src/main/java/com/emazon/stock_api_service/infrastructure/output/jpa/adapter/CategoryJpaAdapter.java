@@ -58,4 +58,9 @@ public class CategoryJpaAdapter implements ICategoryPersistencePort {
     public void updateCategory(Category category) {
         categoryRepository.save(categoryEntityMapper.toEntity(category));
     }
+
+    @Override
+    public void deleteCategoryById(Long id) {
+        categoryRepository.deleteById(id);
+    }
 }
