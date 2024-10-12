@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Configuration;
 public class BeanConfiguration {
     private final ICategoryRepository categoryRepository;
     private final ICategoryEntityMapper categoryEntityMapper;
-//    private final IBrandRepository brandRepository;
-//    private final IBrandEntityMapper brandEntityMapper;
+    private final IBrandRepository brandRepository;
+    private final IBrandEntityMapper brandEntityMapper;
 //    private final IArticleRepository articleRepository;
 //    private final IArticleEntityMapper articleEntityMapper;
 
