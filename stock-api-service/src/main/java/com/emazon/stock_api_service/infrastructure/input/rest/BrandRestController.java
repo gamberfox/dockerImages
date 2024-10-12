@@ -58,6 +58,7 @@ public class BrandRestController {
     @PutMapping("/")
     public ResponseEntity<Map<String,Object>> updateBrand(
             @RequestBody BrandRequest brandRequest){
+        brandHandler.updateBrand(brandRequest);
         RestResponse response= new RestResponse(BRAND_UPDATED,
                 brandRequest);
         return new ResponseEntity<>(response.getResponse(),
