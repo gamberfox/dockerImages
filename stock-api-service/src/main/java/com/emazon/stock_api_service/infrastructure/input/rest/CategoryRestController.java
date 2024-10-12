@@ -41,8 +41,9 @@ public class    CategoryRestController {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
     }
 
-    @GetMapping("/name/{name}")
-    public ResponseEntity<CategoryResponse> getCategoryByName(@PathVariable(name="name") String name) {
+    @GetMapping("/name/")
+    public ResponseEntity<CategoryResponse> getCategoryByName(
+            @RequestParam(defaultValue="") String name) {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
     }
 
