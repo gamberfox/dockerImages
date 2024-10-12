@@ -46,12 +46,13 @@ public class BrandRestController {
 
     @GetMapping("/all")
     public ResponseEntity<Page<BrandResponse>> getCategories(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue="true") boolean ascendingOrder) {
         List<BrandResponse> brandResponses = brandHandler.getBrandResponses(ascendingOrder);
-        Pageable pageable = PageRequest.of(page, size);
+//        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(0, brandResponses.size());
         return ResponseEntity.ok(new PageImpl<>(brandResponses, pageable, brandResponses.size()));
     }
-    
+
 }

@@ -49,11 +49,12 @@ public class    CategoryRestController {
 
     @GetMapping("/all")
     public ResponseEntity<Page<CategoryResponse>> getCategories(
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size,
+//            @RequestParam(defaultValue = "0") int page,
+//            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue="true") boolean ascendingOrder) {
         List<CategoryResponse> categoryResponses = categoryHandler.getCategoryResponses(ascendingOrder);
-        Pageable pageable = PageRequest.of(page, size);
+//        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(0, categoryResponses.size());
         return ResponseEntity.ok(new PageImpl<>(categoryResponses, pageable, categoryResponses.size()));
     }
 
