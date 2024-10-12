@@ -64,4 +64,14 @@ public class    CategoryRestController {
         return new ResponseEntity<>(response.getResponse(),
                 HttpStatus.OK);
     }
+    @DeleteMapping("/")
+    public ResponseEntity<Map<String,Object>> deleteCategory(
+            @RequestParam(defaultValue = "0") Long id
+    ) {
+        categoryHandler.deleteCategoryById(id);
+        RestResponse response= new RestResponse(CATEGORY_DELETED,
+                id);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
+    }
 }
