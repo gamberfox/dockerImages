@@ -2,6 +2,7 @@ package com.emazon.stock_api_service.infrastructure.exception;
 
 //import com.emazon.stock_api_service.domain.exception.ArticleUseCaseException;
 //import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
+import com.emazon.stock_api_service.domain.exception.BrandUseCaseException;
 import com.emazon.stock_api_service.domain.exception.CategoryUseCaseException;
 import com.emazon.stock_api_service.domain.exception.ResourceNotFoundException;
 import jakarta.validation.ConstraintViolationException;
@@ -51,14 +52,14 @@ public class GlobalExceptionHandler {
                         ex.getMessage());
         return new ResponseEntity<>(errorResponse.getResponse(),HttpStatus.NOT_FOUND);
     }
-//    @ExceptionHandler(BrandUseCaseException.class)
-//    public ResponseEntity<Map<String, Object>> handleBrandUseCaseException(BrandUseCaseException ex){
-//        JsonErrorResponse errorResponse =
-//                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
-//                        ex.getErrorList());
-//        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
-//    }
-//
+    @ExceptionHandler(BrandUseCaseException.class)
+    public ResponseEntity<Map<String, Object>> handleBrandUseCaseException(BrandUseCaseException ex){
+        JsonErrorResponse errorResponse =
+                new JsonErrorResponse(HttpStatus.BAD_REQUEST.value(),
+                        ex.getErrorList());
+        return new ResponseEntity<>(errorResponse.getResponse(), HttpStatus.BAD_REQUEST);
+    }
+
 //    @ExceptionHandler(ArticleUseCaseException.class)
 //    public ResponseEntity<Map<String, Object>> handleArticleUseCaseException(ArticleUseCaseException ex){
 //        JsonErrorResponse errorResponse =
