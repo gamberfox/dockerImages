@@ -35,8 +35,9 @@ public class    CategoryRestController {
     public ResponseEntity<String> responseTest(){
         return ResponseEntity.ok("another aa test");
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponse> getCategoryById(@PathVariable(name="id") Long id) {
+    @GetMapping("/")
+    public ResponseEntity<CategoryResponse> getCategoryById(
+            @RequestParam(name="id") Long id) {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
     }
 
