@@ -41,13 +41,13 @@ public class    CategoryRestController {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseById(id));
     }
 
-    @GetMapping("/name/")
+    @GetMapping("/name")
     public ResponseEntity<CategoryResponse> getCategoryByName(
             @RequestParam(defaultValue="") String name) {
         return ResponseEntity.ok(categoryHandler.getCategoryResponseByName(name));
     }
 
-    @GetMapping("/all/")
+    @GetMapping("/all")
     public ResponseEntity<Page<CategoryResponse>> getCategories(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
