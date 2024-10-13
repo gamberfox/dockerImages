@@ -4,6 +4,7 @@ import com.emazon.stock_api_service.application.dto.ArticleRequest;
 import com.emazon.stock_api_service.application.dto.ArticleResponse;
 import com.emazon.stock_api_service.application.dto.BrandResponse;
 import com.emazon.stock_api_service.application.handler.IArticleHandler;
+import com.emazon.stock_api_service.domain.model.Article;
 import com.emazon.stock_api_service.domain.usecase.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -36,12 +37,13 @@ public class ArticleRestController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<BrandResponse>> getArticles(
-            @RequestParam(defaultValue="true") boolean ascendingOrder) {
-        List<BrandResponse> brandResponses = articleHandler.getArticleResponses(ascendingOrder);
+    public ResponseEntity<Page<ArticleResponse>> getArticles(
+            @RequestParam(defaultValue="true") boolean ascendingOrder,
+            @RequestParam(defaultValue = "article") String comparator) {
+        List<ArticleResponse> articles = articleHandler.getArticles(ascendingOrder,comparator);
 //        Pageable pageable = PageRequest.of(page, size);
-        Pageable pageable = PageRequest.of(0, brandResponses.size());
-        return ResponseEntity.ok(new PageImpl<>(brandResponses, pageable, brandResponses.size()));
+        Pageable pageable = PageRequest.of(0, articles.size());
+        return ResponseEntity.ok(new PageImpl<>(articles, pageable, articles.size()));
     }
 
 //    @GetMapping("/a/{id}")

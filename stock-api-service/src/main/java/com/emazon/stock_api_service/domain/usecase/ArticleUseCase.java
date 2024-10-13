@@ -56,14 +56,17 @@ public class ArticleUseCase implements IArticleServicePort {
     @Override
     public List<Article> getArticles
             (Boolean ascendingOrder, String comparator) {
-        List<Article> articles=new ArrayList<>();
-        articles=articlePersistencePort.getArticles();
+        List<Article> articles=articlePersistencePort.getArticles();
         sortArticles(articles,ascendingOrder,comparator);
         return articles;
     }
 
     @Override
-    public PageResponse<Article> getArticlePage(Boolean ascendingOrder, String comparator, Long pageSize, Long pageNumber) {
+    public PageResponse<Article> getArticlePage
+            (Boolean ascendingOrder,
+             String comparator,
+             Long pageSize,
+             Long pageNumber) {
         List<Article> articles=new ArrayList<>();
         validateGetArticlesRequestParam(pageSize,pageNumber,articles);
         articles=articlePersistencePort.getArticles();
