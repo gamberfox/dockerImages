@@ -24,6 +24,6 @@ public class CategoryEntity {
     private String name;
     private String description;
 
-//    @ManyToMany(mappedBy = "categories")//we tell spring this not the honor entity
-//    private List<ArticleEntity> categories;
+    @ManyToMany(mappedBy = "categories")//we tell spring this not the honor entity
+    private List<ArticleEntity> categories;
 }
