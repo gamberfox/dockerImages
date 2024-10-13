@@ -50,4 +50,9 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
         ArticleEntity articleEntity = articleEntityMapper.toArticleEntity(article);
         articleRepository.save(articleEntity);
     }
+
+    @Override
+    public void deleteArticle(Long id) {
+        articleRepository.deleteById(id);
+    }
 }

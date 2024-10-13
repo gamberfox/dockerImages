@@ -124,6 +124,17 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
+    public void deleteArticle(Long id) {
+        if(id==null || !articlePersistencePort.articleIdExists(id)) {
+            throw new ResourceNotFoundException(EMPTY_PARAMETER);
+        }
+        if(!articlePersistencePort.articleIdExists(id)){
+            throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
+        }
+        articlePersistencePort.deleteArticle(id);
+    }
+
+    @Override
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         if(article==null) {

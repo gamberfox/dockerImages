@@ -52,6 +52,14 @@ public class ArticleRestController {
         RestResponse response=new RestResponse(ARTICLE_UPDATED, articleRequest);
         return new ResponseEntity<>(response.getResponse(), HttpStatus.CREATED);
     }
+    @DeleteMapping("/")
+    public ResponseEntity<Map<String, Object>> deleteArticleById(
+            @RequestParam(defaultValue = "0") Long id
+    ){
+        RestResponse response= new RestResponse(ARTICLE_DELETED, id);
+        return new ResponseEntity<>(
+                response.getResponse(), HttpStatus.OK);
+    }
 
 //    @GetMapping("/page")
 //    public ResponseEntity<Page<ArticleResponse>> getArticles(

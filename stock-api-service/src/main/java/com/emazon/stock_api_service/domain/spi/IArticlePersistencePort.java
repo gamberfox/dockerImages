@@ -11,4 +11,5 @@ public interface IArticlePersistencePort {
     Boolean articleIdExists(Long id);
     Boolean articleNameExists(String name);
     void updateArticle(Article article);
+    void deleteArticle(Long id);
 }

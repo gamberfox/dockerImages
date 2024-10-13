@@ -14,4 +14,5 @@ public interface IArticleServicePort {
     PageResponse<Article> getArticlePage(Boolean ascendingOrder, String comparator, Long pageSize, Long pageNumber);
     void validateGetArticlesRequestParam(Long pageSize, Long pageNumber,List<Article> articles);
     void updateArticle(Article article);
+    void deleteArticle(Long id);
 }

@@ -65,4 +65,9 @@ public class ArticleHandler implements IArticleHandler {
         Article article = articleRequestMapper.toArticle(articleRequest);
         articleServicePort.updateArticle(article);
     }
+
+    @Override
+    public void deleteArticle(Long id) {
+        articleServicePort.deleteArticle(id);
+    }
 }
