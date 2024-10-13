@@ -5,7 +5,7 @@ import java.util.List;
 public class CategoryUseCaseException extends RuntimeException {
     private final List<String> errorList;
     public CategoryUseCaseException(List<String> errorList) {
-        super("VALIDATION_ERROR");
+        super("CATEGORY_VALIDATION_ERROR");
         this.errorList = errorList;
     }
     public List<String> getErrorList() {
