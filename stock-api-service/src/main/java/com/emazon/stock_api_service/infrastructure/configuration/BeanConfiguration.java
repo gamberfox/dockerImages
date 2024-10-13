@@ -9,6 +9,8 @@ import com.emazon.stock_api_service.domain.spi.IBrandPersistencePort;
 import com.emazon.stock_api_service.domain.spi.ICategoryPersistencePort;
 import com.emazon.stock_api_service.domain.usecase.BrandUseCase;
 import com.emazon.stock_api_service.domain.usecase.CategoryUseCase;
+import com.emazon.stock_api_service.domain.usecase.ArticleUseCase;
+import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.ArticleJpaAdapter;
 import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.BrandJpaAdapter;
 import com.emazon.stock_api_service.infrastructure.output.jpa.adapter.CategoryJpaAdapter;
 import com.emazon.stock_api_service.infrastructure.output.jpa.mapper.IArticleEntityMapper;
@@ -56,7 +58,8 @@ public class BeanConfiguration {
     public IArticlePersistencePort articlePersistencePort() {
         return new ArticleJpaAdapter(
                 articleRepository,articleEntityMapper
-        ,categoryRepository,categoryEntityMapper);
+//        ,categoryRepository,categoryEntityMapper
+        );
     }
     @Bean
     public IArticleServicePort articleServicePort() {
