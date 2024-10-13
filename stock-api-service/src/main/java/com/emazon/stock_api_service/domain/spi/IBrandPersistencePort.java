@@ -12,4 +12,5 @@ public interface IBrandPersistencePort {
     boolean brandIdExists(Long id);
     List<Brand> getBrands();
     void updateBrand(Brand brand);
+    void deleteBrand(Long id);
 }

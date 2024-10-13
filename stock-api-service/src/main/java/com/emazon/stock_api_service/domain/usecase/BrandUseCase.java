@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import static com.emazon.stock_api_service.util.BrandConstants.*;
 import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NAME_ALREADY_EXISTS;
+import static com.emazon.stock_api_service.util.CategoryConstants.CATEGORY_NOT_FOUND;
 import static com.emazon.stock_api_service.util.GenericConstants.EMPTY_BODY;
 
 public class BrandUseCase implements IBrandServicePort {
@@ -70,6 +71,16 @@ public class BrandUseCase implements IBrandServicePort {
             }
         }
         this.brandPersistencePort.updateBrand(brand);
+    }
+
+    @Override
+    public void deleteBrand(Long id) {
+        if(Boolean.FALSE.equals(idExists(id))) {
+            List<String> errorList=new ArrayList<>();
+            errorList.add(CATEGORY_NOT_FOUND);
+            throw new BrandUseCaseException(errorList);
+        }
+        this.brandPersistencePort.deleteBrand(id);
     }
 
     @Override

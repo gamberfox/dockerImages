@@ -11,4 +11,5 @@ public interface IBrandHandler {
     BrandResponse getBrandResponseByName(String name);
     List<BrandResponse> getBrandResponses(Boolean ascendingOrder);
     void updateBrand(BrandRequest brandRequest);
+    void deleteBrand(Long id);
 }

@@ -64,4 +64,14 @@ public class BrandRestController {
         return new ResponseEntity<>(response.getResponse(),
                 HttpStatus.OK);
     }
+    @DeleteMapping("/")
+    public ResponseEntity<Map<String,Object>> deleteBrand(
+            @RequestParam(defaultValue = "0") Long id
+    ){
+        brandHandler.deleteBrand(id);
+        RestResponse response= new RestResponse(BRAND_DELETED,
+                id);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
+    }
 }

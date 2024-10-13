@@ -60,4 +60,9 @@ public class BrandJpaAdapter implements IBrandPersistencePort {
         BrandEntity brandEntity = brandEntityMapper.toBrandEntity(brand);
         brandRepository.save(brandEntity);
     }
+
+    @Override
+    public void deleteBrand(Long id) {
+        brandRepository.deleteById(id);
+    }
 }
