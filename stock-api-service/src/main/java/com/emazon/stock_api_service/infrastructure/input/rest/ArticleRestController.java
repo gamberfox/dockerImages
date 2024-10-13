@@ -27,11 +27,12 @@ public class ArticleRestController {
         return new ResponseEntity<>(response.getResponse(), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ArticleResponse> getArticleById(@PathVariable(name="id") Long id) {
-//        return ResponseEntity.ok(articleHandler.getArticleResponseById(id));
-//    }
-//
+    @GetMapping("/")
+    public ResponseEntity<ArticleResponse> getArticleById(
+            @RequestParam(defaultValue="0") Long id) {
+        return ResponseEntity.ok(articleHandler.getArticleResponseById(id));
+    }
+
 //    @GetMapping("/a/{id}")
 //    public ResponseEntity<String> test1(@PathVariable(name="id") Long id) {
 //        return ResponseEntity.ok(
@@ -40,7 +41,7 @@ public class ArticleRestController {
 //        +articleHandler.getArticleResponseById(id).getBrand().getName());
 //    }
 
-//    @GetMapping("/")
+//    @GetMapping("/all")
 //    public ResponseEntity<Page<ArticleResponse>> getArticles(
 //            @RequestParam(defaultValue = "0") int page,//page you want to get
 //            @RequestParam(defaultValue = "10") Long pageSize,
