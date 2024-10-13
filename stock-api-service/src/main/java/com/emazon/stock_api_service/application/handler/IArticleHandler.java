@@ -11,4 +11,5 @@ public interface IArticleHandler {
     ArticleResponse getArticleResponseById(Long id);
     List<ArticleResponse> getArticles(Boolean ascendingOrder, String comparator);
     PageResponse<ArticleResponse> getArticlePage(Boolean ascendingOrder, String comparator,Long pageSize,Long pageNumber);
+    void updateArticle(ArticleRequest articleRequest);
 }

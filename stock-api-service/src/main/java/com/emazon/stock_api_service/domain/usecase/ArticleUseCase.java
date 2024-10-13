@@ -106,6 +106,21 @@ public class ArticleUseCase implements IArticleServicePort {
     }
 
     @Override
+    public void updateArticle(Article article) {
+        validate(article);
+        article.setBrand(brandPersistencePort
+                .getBrandById(article.getBrand().getId()));
+        List<Category> categoriesToAdd = new ArrayList<>();
+        for(Category category : article.getCategories()) {
+            categoriesToAdd.add(categoryPersistencePort
+                    .getCategoryById(category.getId()));
+        }
+        categoriesToAdd.sort((a, b) -> a.getName().compareTo(b.getName()));
+        article.setCategories(categoriesToAdd);
+        articlePersistencePort.updateArticle(article);
+    }
+
+    @Override
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
         validateBrand(article.getBrand(),errorList);

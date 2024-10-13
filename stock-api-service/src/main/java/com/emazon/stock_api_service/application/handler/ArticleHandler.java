@@ -59,4 +59,10 @@ public class ArticleHandler implements IArticleHandler {
                 articles.getCurrentPage()
         );
     }
+
+    @Override
+    public void updateArticle(ArticleRequest articleRequest) {
+        Article article = articleRequestMapper.toArticle(articleRequest);
+        articleServicePort.updateArticle(article);
+    }
 }
