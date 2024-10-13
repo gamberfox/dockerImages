@@ -50,4 +50,9 @@ public class BrandHandler implements IBrandHandler{
         Brand brand = brandRequestMapper.toBrand(brandRequest);
         brandServicePort.updateBrand(brand);
     }
+
+    @Override
+    public void deleteBrand(Long id) {
+        brandServicePort.deleteBrand(id);
+    }
 }
