@@ -2,7 +2,9 @@ package com.emazon.stock_api_service.infrastructure.input.rest;
 
 import com.emazon.stock_api_service.application.dto.ArticleRequest;
 import com.emazon.stock_api_service.application.dto.ArticleResponse;
+import com.emazon.stock_api_service.application.dto.BrandResponse;
 import com.emazon.stock_api_service.application.handler.IArticleHandler;
+import com.emazon.stock_api_service.domain.model.Article;
 import com.emazon.stock_api_service.domain.usecase.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.*;
@@ -10,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.emazon.stock_api_service.util.ArticleConstants.*;
@@ -27,11 +30,22 @@ public class ArticleRestController {
         return new ResponseEntity<>(response.getResponse(), HttpStatus.CREATED);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<ArticleResponse> getArticleById(@PathVariable(name="id") Long id) {
-//        return ResponseEntity.ok(articleHandler.getArticleResponseById(id));
-//    }
-//
+    @GetMapping("/")
+    public ResponseEntity<ArticleResponse> getArticleById(
+            @RequestParam(defaultValue="0") Long id) {
+        return ResponseEntity.ok(articleHandler.getArticleResponseById(id));
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<Page<ArticleResponse>> getArticles(
+            @RequestParam(defaultValue="true") boolean ascendingOrder,
+            @RequestParam(defaultValue = "article") String comparator) {
+        List<ArticleResponse> articles = articleHandler.getArticles(ascendingOrder,comparator);
+//        Pageable pageable = PageRequest.of(page, size);
+        Pageable pageable = PageRequest.of(0, articles.size());
+        return ResponseEntity.ok(new PageImpl<>(articles, pageable, articles.size()));
+    }
+
 //    @GetMapping("/a/{id}")
 //    public ResponseEntity<String> test1(@PathVariable(name="id") Long id) {
 //        return ResponseEntity.ok(
@@ -40,7 +54,7 @@ public class ArticleRestController {
 //        +articleHandler.getArticleResponseById(id).getBrand().getName());
 //    }
 
-//    @GetMapping("/")
+//    @GetMapping("/page")
 //    public ResponseEntity<Page<ArticleResponse>> getArticles(
 //            @RequestParam(defaultValue = "0") int page,//page you want to get
 //            @RequestParam(defaultValue = "10") Long pageSize,

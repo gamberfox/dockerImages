@@ -46,7 +46,7 @@ public class BrandRestController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<BrandResponse>> getCategories(
+    public ResponseEntity<Page<BrandResponse>> getBrands(
 //            @RequestParam(defaultValue = "0") int page,
 //            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue="true") boolean ascendingOrder) {
