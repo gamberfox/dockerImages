@@ -10,4 +10,5 @@ public interface IArticlePersistencePort {
     List<Article> getArticles();
     Boolean articleIdExists(Long id);
     Boolean articleNameExists(String name);
+    void updateArticle(Article article);
 }

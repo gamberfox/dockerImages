@@ -44,4 +44,10 @@ public class ArticleJpaAdapter implements IArticlePersistencePort {
     public Boolean articleNameExists(String name) {
         return articleRepository.findByName(name).isPresent();
     }
+
+    @Override
+    public void updateArticle(Article article) {
+        ArticleEntity articleEntity = articleEntityMapper.toArticleEntity(article);
+        articleRepository.save(articleEntity);
+    }
 }

@@ -46,13 +46,12 @@ public class ArticleRestController {
         return ResponseEntity.ok(new PageImpl<>(articles, pageable, articles.size()));
     }
 
-//    @GetMapping("/a/{id}")
-//    public ResponseEntity<String> test1(@PathVariable(name="id") Long id) {
-//        return ResponseEntity.ok(
-//                articleHandler.getArticleResponseById(id).getName()
-//        +articleHandler.getArticleResponseById(id).getId()
-//        +articleHandler.getArticleResponseById(id).getBrand().getName());
-//    }
+    @PutMapping("/")
+    public ResponseEntity<Map<String, Object>> updateArticle(@RequestBody ArticleRequest articleRequest) {
+        articleHandler.updateArticle(articleRequest);
+        RestResponse response=new RestResponse(ARTICLE_UPDATED, articleRequest);
+        return new ResponseEntity<>(response.getResponse(), HttpStatus.CREATED);
+    }
 
 //    @GetMapping("/page")
 //    public ResponseEntity<Page<ArticleResponse>> getArticles(

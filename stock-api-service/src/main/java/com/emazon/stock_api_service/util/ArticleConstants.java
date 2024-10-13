@@ -8,6 +8,7 @@ public class ArticleConstants {
     public static final String ARTICLE_UPDATED = "The article was successfully updated";
     public static final String ARTICLE_DELETED = "The article was successfully deleted";
     public static final String ARTICLE_NOT_FOUND = "The article does not exist";
+    public static final String ARTICLE_ID_NOT_FOUND = "The article id does not exist";
     public static final String BRAND_ID_NOT_FOUND = "The brand id does not exist";
     public static final String BRAND_OBLIGATORY = "you must include a brand";
     public static final String CATEGORY_LIST_OBLIGATORY = "you must include category list";

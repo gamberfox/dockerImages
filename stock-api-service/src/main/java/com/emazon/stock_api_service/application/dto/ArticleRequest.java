@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 public class ArticleRequest {
+    private Long id;
     private String name;
     private String description;
     private Long stock;

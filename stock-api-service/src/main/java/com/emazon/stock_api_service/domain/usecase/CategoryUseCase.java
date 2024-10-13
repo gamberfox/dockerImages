@@ -35,6 +35,7 @@ public class CategoryUseCase implements ICategoryServicePort {
             throw new CategoryUseCaseException(errorList);
         }
         this.validate(category);
+        category.setId(0L);
         if(Boolean.TRUE.equals(nameExists(category.getName()))) {
             List<String> errorList=new ArrayList<>();
             errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
