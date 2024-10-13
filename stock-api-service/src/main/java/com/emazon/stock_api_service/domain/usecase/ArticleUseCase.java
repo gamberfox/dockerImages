@@ -107,6 +107,9 @@ public class ArticleUseCase implements IArticleServicePort {
 
     @Override
     public void updateArticle(Article article) {
+        if(Boolean.FALSE.equals(articlePersistencePort.articleIdExists(article.getId()))) {
+            throw new ResourceNotFoundException(ARTICLE_NOT_FOUND);
+        }
         validate(article);
         article.setBrand(brandPersistencePort
                 .getBrandById(article.getBrand().getId()));
@@ -123,6 +126,10 @@ public class ArticleUseCase implements IArticleServicePort {
     @Override
     public void validate(Article article) {
         List<String> errorList=new ArrayList<>();
+        if(article==null) {
+            errorList.add(EMPTY_BODY);
+            throw new ArticleUseCaseException(errorList);
+        }
         validateBrand(article.getBrand(),errorList);
         validateCategories(article.getCategories(),errorList);
         if(!errorList.isEmpty()) {
