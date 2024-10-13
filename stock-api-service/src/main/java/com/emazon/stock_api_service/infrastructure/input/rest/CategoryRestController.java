@@ -59,7 +59,8 @@ public class    CategoryRestController {
     }
 
     @PutMapping("/")
-    public ResponseEntity<Map<String,Object>> updateCategory(@RequestBody CategoryRequest categoryRequest) {
+    public ResponseEntity<Map<String,Object>> updateCategory(
+            @RequestBody CategoryRequest categoryRequest) {
         categoryHandler.updateCategory(categoryRequest);
         RestResponse response= new RestResponse(CATEGORY_UPDATED,
                 categoryRequest);
