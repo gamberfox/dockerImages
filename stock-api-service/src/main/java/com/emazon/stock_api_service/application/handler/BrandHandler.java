@@ -44,4 +44,15 @@ public class BrandHandler implements IBrandHandler{
                 .map(brandResponseMapper::toBrandResponse)
                 .toList();
     }
+
+    @Override
+    public void updateBrand(BrandRequest brandRequest) {
+        Brand brand = brandRequestMapper.toBrand(brandRequest);
+        brandServicePort.updateBrand(brand);
+    }
+
+    @Override
+    public void deleteBrand(Long id) {
+        brandServicePort.deleteBrand(id);
+    }
 }

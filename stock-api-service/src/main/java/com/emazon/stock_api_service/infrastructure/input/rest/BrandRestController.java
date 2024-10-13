@@ -4,6 +4,7 @@ package com.emazon.stock_api_service.infrastructure.input.rest;
 import com.emazon.stock_api_service.application.dto.BrandRequest;
 import com.emazon.stock_api_service.application.dto.BrandResponse;
 import com.emazon.stock_api_service.application.handler.IBrandHandler;
+import com.emazon.stock_api_service.domain.model.Brand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-import static com.emazon.stock_api_service.util.BrandConstants.BRAND_CREATED;
+import static com.emazon.stock_api_service.util.BrandConstants.*;
 
 @RestController
 @RequestMapping("/brand")
@@ -45,7 +46,7 @@ public class BrandRestController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<Page<BrandResponse>> getCategories(
+    public ResponseEntity<Page<BrandResponse>> getBrands(
 //            @RequestParam(defaultValue = "0") int page,
 //            @RequestParam(defaultValue = "10") int size,
             @RequestParam(defaultValue="true") boolean ascendingOrder) {
@@ -54,5 +55,23 @@ public class BrandRestController {
         Pageable pageable = PageRequest.of(0, brandResponses.size());
         return ResponseEntity.ok(new PageImpl<>(brandResponses, pageable, brandResponses.size()));
     }
-
+    @PutMapping("/")
+    public ResponseEntity<Map<String,Object>> updateBrand(
+            @RequestBody BrandRequest brandRequest){
+        brandHandler.updateBrand(brandRequest);
+        RestResponse response= new RestResponse(BRAND_UPDATED,
+                brandRequest);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
+    }
+    @DeleteMapping("/")
+    public ResponseEntity<Map<String,Object>> deleteBrand(
+            @RequestParam(defaultValue = "0") Long id
+    ){
+        brandHandler.deleteBrand(id);
+        RestResponse response= new RestResponse(BRAND_DELETED,
+                id);
+        return new ResponseEntity<>(response.getResponse(),
+                HttpStatus.OK);
+    }
 }
