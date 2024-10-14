@@ -21,6 +21,7 @@ spec:
           image: ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
           ports:
             - containerPort: 8000
+          env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql:3306/stock # Ensure this matches your MySQL service
             - name: SPRING_DATASOURCE_USERNAME
