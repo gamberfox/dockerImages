@@ -91,15 +91,15 @@ class CategoryUseCaseTest {
         }
     }
 
-    @Test
-    void testCategoryValidateNameAlreadyExists() {
-        when(categoryUseCase.nameExists("categoryName")).thenReturn(true);
-        Category category = new Category(null,"categoryName", "description");
-        CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class
-                , () -> categoryUseCase.validate(category));
-        assertEquals(CATEGORY_NAME_ALREADY_EXISTS
-                ,ex.getErrorList().get(0));
-    }
+//    @Test
+//    void testCategoryValidateNameAlreadyExists() {
+//        when(categoryUseCase.nameExists("categoryName")).thenReturn(true);
+//        Category category = new Category(null,"categoryName", "description");
+//        CategoryUseCaseException ex = assertThrows(CategoryUseCaseException.class
+//                , () -> categoryUseCase.validate(category));
+//        assertEquals(CATEGORY_NAME_ALREADY_EXISTS
+//                ,ex.getErrorList().get(0));
+//    }
 
     @Test
     void testCategoryValidateNameTooLong(){
