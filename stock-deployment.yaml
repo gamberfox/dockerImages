@@ -1,0 +1,69 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: javi-deployment
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-app
+  template:
+    metadata:
+      labels:
+        app: stock-app
+    spec:
+      #imagePullSecrets:
+      # - name: github-registry-key
+      containers:
+        - name: stock-container
+          #image: gamberfox/lab-app:latest
+          image: ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:mysql://mysql:3306/stock # Ensure this matches your MySQL service
+            - name: SPRING_DATASOURCE_USERNAME
+              value: root
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: root
+        - name: mysql-container
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+
+          env:
+            - name: MYSQL_DATABASE
+              value: stock
+            - name: MYSQL_USER
+              value: root
+            - name: MYSQL_PASSWORD
+              value: root
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          emptyDir: {}
+
+      # imagePullSecrets:
+      #   - name: ghcr-secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: javi-service
+  namespace: default
+spec:
+  type: NodePort #LoadBalancer
+  #type: LoadBalancer
+  selector:
+    app: stock-app
+  ports:
+    - protocol: TCP
+      port: 80 #service port
+      targetPort: 8000 #containerPort and targetPort have to match
+      nodePort: 30001
