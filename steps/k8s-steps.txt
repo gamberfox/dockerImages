@@ -1,0 +1,6 @@
+
+
+kubectl apply -f stock-deployment.yaml
+
+###MAYBE NOT THIS
+kubectl apply -f service.yaml
