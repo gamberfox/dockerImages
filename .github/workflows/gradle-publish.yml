@@ -26,12 +26,12 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_DATABASE: test_db
-          MYSQL_USER: test_user
-          MYSQL_PASSWORD: test_password
-          MYSQL_ROOT_PASSWORD: root_password
+          MYSQL_DATABASE: stock
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
+          MYSQL_ROOT_PASSWORD: root
         options: >-
-          --health-cmd "mysqladmin ping -h localhost -u root --password=root_password"
+          --health-cmd "mysqladmin ping -h localhost -u root --password=root"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
@@ -62,7 +62,7 @@ jobs:
       # Set up environment variables for the MySQL database connection
       - name: Set DB environment variables
         run: |
-          echo "SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/test_db" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/stock" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_USERNAME=test_user" >> $GITHUB_ENV
           echo "SPRING_DATASOURCE_PASSWORD=test_password" >> $GITHUB_ENV
 
