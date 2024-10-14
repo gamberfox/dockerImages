@@ -1,20 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysql
-  namespace: default
-spec:
-  selector:
-    app: stock-app
-  ports:
-    - protocol: TCP
-      port: 3306
-      targetPort: 3306
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: javi-service
+  name: stock-d
   namespace: default
 spec:
   type: NodePort #LoadBalancer
@@ -46,23 +33,6 @@ spec:
       #imagePullSecrets:
       # - name: github-registry-key
       containers:
-        - name: mysql-container
-          image: mysql:8
-          ports:
-            - containerPort: 3306
-
-          env:
-            - name: MYSQL_DATABASE
-              value: stock
-            # - name: MYSQL_USER
-            #   value: root
-            # - name: MYSQL_PASSWORD
-            #   value: root
-            - name: MYSQL_ROOT_PASSWORD
-              value: root
-          volumeMounts:
-            - name: mysql-storage
-              mountPath: /var/lib/mysql
         - name: stock-container
           #image: gamberfox/lab-app:latest
           image: ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
@@ -75,14 +45,3 @@ spec:
               value: root
             - name: DB_PASSWORD
               value: root
-            # - name: SPRING_JPA_HIBERNATE_DDL_AUTO
-            #   value: update  # or validate depending on your needs
-            # - name: SPRING_JPA_DATABASE_PLATFORM
-            #   value: org.hibernate.dialect.MySQLDialect
-      volumes:
-        - name: mysql-storage
-          emptyDir: {}
-
-      # imagePullSecrets:
-      #   - name: ghcr-secret
----

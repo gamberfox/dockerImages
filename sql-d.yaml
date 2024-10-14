@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: default
+spec:
+  selector:
+    app: sql-d
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-d
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: stock-app
+  template:
+    metadata:
+      labels:
+        app: stock-app
+    spec:
+      #imagePullSecrets:
+      # - name: github-registry-key
+      containers:
+        - name: mysql-container
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+
+          env:
+            - name: MYSQL_DATABASE
+              value: stock
+            # - name: MYSQL_USER
+            #   value: root
+            # - name: MYSQL_PASSWORD
+            #   value: root
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          emptyDir: {}
