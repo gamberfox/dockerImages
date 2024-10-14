@@ -75,10 +75,13 @@ jobs:
 
       # Run Gradle build and test
       - name: Build with Gradle
-        run: ./stock-api-service/gradlew build --no-daemon
+        working-directory: ./stock-api-service
+        # run: ./stock-api-service/gradlew build --no-daemon
+        run: ./gradlew build --no-daemon
 
       - name: Run tests
-        run: ./stock-api-service/gradlew test --no-daemon
+        working-directory: ./stock-api-service
+        run: ./gradlew test --no-daemon
 
       # Build Docker image
       - name: Build Docker image
