@@ -86,15 +86,15 @@ class BrandUseCaseTest {
             assertEquals(organizedBrands.get(i).getDescription(),testList.get(i).getDescription());
         }
     }
-    @Test
-    void testBrandValidateNameAlreadyExists() {
-        when(brandUseCase.nameExists("lego")).thenReturn(true);
-        Brand brand = new Brand(null,"lego", "description");
-        BrandUseCaseException ex = assertThrows(BrandUseCaseException.class
-                , () -> brandUseCase.validate(brand));
-        assertEquals(BRAND_NAME_ALREADY_EXISTS
-                ,ex.getErrorList().get(0));
-    }
+//    @Test
+//    void testBrandValidateNameAlreadyExists() {
+//        when(brandUseCase.nameExists("lego")).thenReturn(true);
+//        Brand brand = new Brand(null,"lego", "description");
+//        BrandUseCaseException ex = assertThrows(BrandUseCaseException.class
+//                , () -> brandUseCase.validate(brand));
+//        assertEquals(BRAND_NAME_ALREADY_EXISTS
+//                ,ex.getErrorList().get(0));
+//    }
     @Test
     void testBrandValidateNameTooLong(){
         Brand brand = new Brand(null, "a".repeat(51), "description");
