@@ -1,0 +1,14 @@
+
+
+minikube service nginx-service --url
+
+minikube service stock-service --url
+
+
+kubectl port-forward svc/mysql-service 3306:3306
+
+
+kubectl port-forward stock-d-cff857c54-5tvxg 8090:8090
+
+
+###OR

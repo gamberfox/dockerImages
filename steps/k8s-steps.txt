@@ -17,5 +17,4 @@ kubectl.exe get deployments -o wide
 
 kubectl.exe logs javi-deployment-58f97f8b89-29t6j -c stock-container -n default
 
-kubectl logs stock-container -n default
 

@@ -1,0 +1,17 @@
+
+kubectl.exe apply -f sql-d.yaml
+kubectl.exe apply -f stock-d.yaml
+
+kubectl.exe logs sql-d-7bf5654768-4r78d -c mysql-container -n default
+
+
+kubectl.exe get deployments -o wide
+
+kubectl.exe logs stock-d-cff857c54-44zmd -c stock-container -n default
+
+
+kubectl exec -it sql-d-7bf5654768-4r78d -- /bin/bash
+mysql -u root -p
+
+
+kubectl delete deployment stock-d
