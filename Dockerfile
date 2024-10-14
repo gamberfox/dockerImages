@@ -6,6 +6,7 @@ WORKDIR /stock-api-service
 
 # Set environment variables (you can replace these with real values or pass them at runtime)
 # ENV DB_URL=jdbc:mysql://192.168.128.5:3306/stock
+ENV DB_URL=jdbc:mysql://172.17.0.2:3306/stock
 ENV DB_USERNAME=root
 ENV DB_PASSWORD=root
 

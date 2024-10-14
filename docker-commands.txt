@@ -4,4 +4,5 @@ docker build -t stock-ms .
 docker run -p 8090:8090 stock-ms
 
 
-docker run --network host --name stock-ms
+docker run --network host -p 8090:8090 --name stock-ms-container
+docker run --network host -p 8090:8090 stock-ms
