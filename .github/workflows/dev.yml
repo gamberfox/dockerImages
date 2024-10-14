@@ -19,14 +19,14 @@ jobs:
           - 3306:3306
         env:
           MYSQL_DATABASE: stock
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
+          # MYSQL_USER: root
+          # MYSQL_PASSWORD: root
           MYSQL_ROOT_PASSWORD: root
         options: >-
           --health-cmd "mysqladmin ping -h localhost -u root --password=root"
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 5
+          --health-retries 10
 
     steps:
       # Check out the repository
