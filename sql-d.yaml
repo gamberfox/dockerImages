@@ -1,0 +1,53 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-service
+  namespace: default
+spec:
+  selector:
+    app: mysql # This should match the labels in the MySQL pod
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql-d
+  namespace: default
+  # labels:
+  #   app: mysql
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql # This should match the labels in the pod template
+  template:
+    metadata:
+      labels:
+        app: mysql  # The label that your stock app will look for
+    spec:
+      #imagePullSecrets:
+      # - name: github-registry-key
+      containers:
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+
+          env:
+            - name: MYSQL_DATABASE
+              value: stock
+            # - name: MYSQL_USER
+            #   value: root
+            # - name: MYSQL_PASSWORD
+            #   value: root
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          volumeMounts:
+            - name: mysql-storage
+              mountPath: /var/lib/mysql
+      volumes:
+        - name: mysql-storage
+          emptyDir: {}

@@ -4,3 +4,17 @@ kubectl apply -f stock-deployment.yaml
 
 ###MAYBE NOT THIS
 kubectl apply -f service.yaml
+
+
+kubectl.exe delete service javi-service
+kubectl.exe delete deployment javi-deployment
+
+
+kubectl.exe get pods -o wide
+
+
+kubectl.exe get deployments -o wide
+
+kubectl.exe logs javi-deployment-58f97f8b89-29t6j -c stock-container -n default
+
+
