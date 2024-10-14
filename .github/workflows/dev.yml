@@ -19,14 +19,14 @@ jobs:
           - 3306:3306
         env:
           MYSQL_DATABASE: stock
-          # MYSQL_USER: root
-          # MYSQL_PASSWORD: root
+          MYSQL_USER: root
+          MYSQL_PASSWORD: root
           MYSQL_ROOT_PASSWORD: root
         options: >-
           --health-cmd "mysqladmin ping -h localhost -u root --password=root"
           --health-interval 10s
           --health-timeout 5s
-          --health-retries 20
+          --health-retries 5
 
     steps:
       # Check out the repository
@@ -44,4 +44,50 @@ jobs:
         run: |
           mysql -h 127.0.0.1 -u root -proot -D stock -e "CREATE TABLE IF NOT EXISTS test_table (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255));"
 
-      # Add additional steps like testing here
+      # Set up JDK 17
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: "17"
+          distribution: "temurin"
+
+      # Cache Gradle dependencies
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      # Set up environment variables for the MySQL database connection
+      - name: Set DB environment variables
+        run: |
+          echo "SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/stock" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_USERNAME=root" >> $GITHUB_ENV
+          echo "SPRING_DATASOURCE_PASSWORD=root" >> $GITHUB_ENV
+
+      # Run Gradle build and test
+      - name: Build with Gradle
+        run: ./gradlew build --no-daemon
+
+      - name: Run tests
+        run: ./gradlew test --no-daemon
+
+      # Build Docker image
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/stock-ms:latest .
+
+      # Log in to GitHub Container Registry
+      - name: Log in to GitHub Container Registry
+        env:
+          CR_PAT: ${{ secrets.LOG_GITHUB }}
+        run: echo "${{ secrets.LOG_GITHUB }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      # Push Docker image to GitHub Container Registry
+      - name: Push Docker image
+        run: |
+          docker push ghcr.io/${{ github.repository }}/stock-ms:latest
