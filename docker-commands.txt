@@ -1,0 +1,7 @@
+
+docker build -t stock-ms .
+
+docker run -p 8090:8090 stock-ms
+
+
+docker run --network host --name stock-ms
