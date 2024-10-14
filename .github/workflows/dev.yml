@@ -42,6 +42,6 @@ jobs:
 
       - name: Run database setup as root
         run: |
-          mysql -h 127.0.0.1 -u root -proot -e "CREATE TABLE IF NOT EXISTS test_table (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255));"
+          mysql -h 127.0.0.1 -u root -proot -D stock -e "CREATE TABLE IF NOT EXISTS test_table (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255));"
 
       # Add additional steps like testing here
