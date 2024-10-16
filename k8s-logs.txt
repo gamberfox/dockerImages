@@ -10,3 +10,7 @@ kubectl describe deployment sql-d
 
 
 kubectl logs pod/stock-d-67995cdd85-mxqh4 -c wait-for-mysql
+
+
+minikube service stock-service --url
+
