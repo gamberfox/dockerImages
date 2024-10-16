@@ -49,3 +49,10 @@ spec:
               value: root
             - name: DB_PASSWORD
               value: root
+          readinessProbe: # Readiness probe ensures the pod only becomes ready when the service is available
+            httpGet:
+              path: /health # Replace with the appropriate health check path for your app
+              port: 8090
+            initialDelaySeconds: 10 # Wait for 10 seconds before checking readiness
+            periodSeconds: 5        # Check every 5 seconds
+            failureThreshold: 3      # Fail if 3 consecutive checks fail
