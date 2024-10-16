@@ -6,7 +6,7 @@ metadata:
   # selector:
   #   app: stock-app
 spec:
-  type: NodePort #LoadBalancer
+  type: NodePort # IP cluster is the default
   #type: LoadBalancer
   selector:
     app: stock-app
@@ -16,7 +16,7 @@ spec:
       targetPort: 8090 #containerPort and targetPort have to match
       nodePort: 30001
 
-
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -30,10 +30,14 @@ spec:
   template:
     metadata:
       labels:
-        app: stock-app  # This label identifies the app's pods
+        app: stock-app # This label identifies the app's pods
     spec:
       #imagePullSecrets:
       # - name: github-registry-key
+      # initContainers: # Init container to check MySQL readiness
+      #   - name: wait-for-mysql
+      #     image: busybox
+      #     command: ['sh', '-c', 'until nc -z stock-service 8090; do echo waiting for stock-se; sleep 5; done;'] # Checks if stock service is ready
       containers:
         - name: stock-container
           #image: gamberfox/lab-app:latest
@@ -42,10 +46,17 @@ spec:
             - containerPort: 8090
           env:
             # - name: DB_URL
-              # value: jdbc:mysql://mysql:3306/stock # Ensure this matches your MySQL service
+            # value: jdbc:mysql://mysql:3306/stock # Ensure this matches your MySQL service
             - name: DB_URL
               value: jdbc:mysql://mysql-service:3306/stock
             - name: DB_USERNAME
               value: root
             - name: DB_PASSWORD
               value: root
+          # readinessProbe: # Readiness probe ensures the pod only becomes ready when the service is available
+          #   httpGet:
+          #     path: /health # Replace with the appropriate health check path for your app
+          #     port: 8090
+          #   initialDelaySeconds: 15 # Wait for 10 seconds before checking readiness
+          #   periodSeconds: 10 # Check every 5 seconds
+          #   failureThreshold: 4 # Fail if 3 consecutive checks fail
