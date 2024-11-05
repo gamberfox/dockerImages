@@ -8,6 +8,8 @@ upload docker images here
 kubectl.exe apply -f stock-deployment.yaml
 ```
 
+## HTTP request documentation
+[URL]/swagger-ui/index.html
 
 # pull docker image
 
