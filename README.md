@@ -2,6 +2,13 @@
 
 upload docker images here
 
+# deploy microservice in kubernetes
+
+```bash
+kubectl.exe apply -f stock-deployment.yaml
+```
+
+
 # pull docker image
 
 ```bash
