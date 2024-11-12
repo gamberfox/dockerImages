@@ -105,7 +105,8 @@ spec:
       containers:
         - name: stock-container
           #image: gamberfox/lab-app:latest
-          image: ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
+          # image: ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
+          image: gamberfox/ms-stock:latest
           ports:
             - containerPort: 8090
           env:
