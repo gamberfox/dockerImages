@@ -4,6 +4,7 @@ upload docker images here
 
 # deploy microservice in kubernetes
 
+after downloading the repository, execute this command
 ```bash
 kubectl.exe apply -f stock-deployment.yaml
 ```
