@@ -62,6 +62,9 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public List<Category> getCategories(Boolean ascendingOrder) {
         List<Category> categories= this.categoryPersistencePort.getCategories();
+        if(categories.isEmpty()){
+            throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
+        }
         sortCategories(categories, ascendingOrder);
         return categories;
     }

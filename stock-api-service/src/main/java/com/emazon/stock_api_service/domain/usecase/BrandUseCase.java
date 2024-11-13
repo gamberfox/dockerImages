@@ -54,6 +54,9 @@ public class BrandUseCase implements IBrandServicePort {
     }
     public List<Brand> getBrands(Boolean ascendingOrder){
         List<Brand> brands= brandPersistencePort.getBrands();
+        if(brands.isEmpty()){
+            throw new ResourceNotFoundException(BRANDS_DO_NOT_EXIST);
+        }
         sortBrands(brands,ascendingOrder);
         return brands;
     }
