@@ -1,10 +1,15 @@
 
-docker build -t stock-ms .
-docker build --no-cache -t stock-ms .
+docker build -t stock-ms:1.02 .
+docker build --no-cache -t stock-ms:1.02 .
 
 docker tag stock-ms gamberfox/stock-ms
 docker push gamberfox/stock-ms
 
+docker tag gamberfox/stock-ms gamberfox/stock-ms:1.01
+
+
+docker build --no-cache -t gamberfox/stock-ms:1.05 .
+docker push gamberfox/stock-ms:1.05
 
 docker run -p 8090:8090 stock-ms
 
