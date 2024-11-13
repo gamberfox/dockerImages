@@ -29,7 +29,6 @@ class CategoryUseCaseTest {
     private ICategoryPersistencePort categoryPersistencePort;
     @InjectMocks
     private CategoryUseCase categoryUseCase;
-
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
