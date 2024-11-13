@@ -7,6 +7,7 @@ docker push gamberfox/stock-ms
 
 docker tag gamberfox/stock-ms gamberfox/stock-ms:1.01
 
+
 docker build --no-cache -t gamberfox/stock-ms:1.05 .
 docker push gamberfox/stock-ms:1.05
 
