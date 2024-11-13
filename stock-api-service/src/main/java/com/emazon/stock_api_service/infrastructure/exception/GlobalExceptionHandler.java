@@ -13,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @ControllerAdvice
@@ -48,9 +51,14 @@ public class GlobalExceptionHandler {
     }
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<Map<String, Object>> handleResourceNotFoundException(ResourceNotFoundException ex){
+        List<String> errorList=new ArrayList<>();
+        errorList.add(ex.getMessage());
+//        JsonErrorResponse errorResponse =
+//                new JsonErrorResponse(HttpStatus.NOT_FOUND.value(),
+//                        ex.getMessage());
         JsonErrorResponse errorResponse =
                 new JsonErrorResponse(HttpStatus.NOT_FOUND.value(),
-                        ex.getMessage());
+                        errorList);
         return new ResponseEntity<>(errorResponse.getResponse(),HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(BrandUseCaseException.class)
