@@ -57,6 +57,9 @@ public class ArticleUseCase implements IArticleServicePort {
     public List<Article> getArticles
             (Boolean ascendingOrder, String comparator) {
         List<Article> articles=articlePersistencePort.getArticles();
+        if(articles.isEmpty()) {
+            throw new ResourceNotFoundException(ARTICLES_DO_NOT_EXIST);
+        }
         sortArticles(articles,ascendingOrder,comparator);
         return articles;
     }

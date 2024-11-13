@@ -8,6 +8,7 @@ public class BrandConstants {
     public static final String BRAND_UPDATED = "The category was successfully updated";
     public static final String BRAND_DELETED = "The category was successfully deleted";
     public static final String BRAND_NOT_FOUND = "The brand does not exist";
+    public static final String BRANDS_DO_NOT_EXIST = "there are no brands in the database";
     public static final String BRAND_ID_OBLIGATORY = "you must include a brand id";
     public static final Integer MAXIMUM_BRAND_NAME_LENGTH=50;
     public static final Integer MAXIMUM_BRAND_DESCRIPTION_LENGTH=90;
