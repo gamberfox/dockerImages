@@ -63,7 +63,7 @@ public class CategoryUseCase implements ICategoryServicePort {
     public List<Category> getCategories(Boolean ascendingOrder) {
         List<Category> categories= this.categoryPersistencePort.getCategories();
         if(categories.isEmpty()){
-            throw new ResourceNotFoundException(CATEGORY_NOT_FOUND);
+            throw new ResourceNotFoundException(CATEGORIES_DO_NOT_EXIST);
         }
         sortCategories(categories, ascendingOrder);
         return categories;
