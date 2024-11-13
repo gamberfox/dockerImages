@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +32,11 @@ public class    CategoryRestController {
         return new ResponseEntity<>(response.getResponse(),
         HttpStatus.CREATED);
     }
-    @GetMapping("/aa")
-    public ResponseEntity<String> responseTest(){
-        return ResponseEntity.ok("another aa test");
+    @GetMapping("/test")
+    public ResponseEntity<Map<String,Object>> responseTest(){
+        Map<String,Object> map=new HashMap<>();
+        map.put("message","this is a test of the stock microservice");
+        return ResponseEntity.ok(map);
     }
     @GetMapping("/")
     public ResponseEntity<CategoryResponse> getCategoryById(
