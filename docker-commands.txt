@@ -1,5 +1,10 @@
 
 docker build -t stock-ms .
+docker build --no-cache -t stock-ms .
+
+docker tag stock-ms gamberfox/stock-ms
+docker push gamberfox/stock-ms
+
 
 docker run -p 8090:8090 stock-ms
 
