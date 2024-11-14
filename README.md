@@ -21,7 +21,7 @@ kubectl.exe apply -f stock-deployment.yaml
 docker pull ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
 ```
 ```bash
-docker pull gamberfox/ms-stock:latest
+docker pull gamberfox/ms-stock:1.06
 ```
 
 
