@@ -76,9 +76,9 @@ public class CategoryUseCase implements ICategoryServicePort {
             Category auxCategory=this
                     .categoryPersistencePort.getCategoryById(category.getId());
             if(!category.getName().equals(auxCategory.getName())) {
-            List<String> errorList=new ArrayList<>();
-            errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
-            throw new CategoryUseCaseException(errorList);
+                List<String> errorList=new ArrayList<>();
+                errorList.add(CATEGORY_NAME_ALREADY_EXISTS);
+                throw new CategoryUseCaseException(errorList);
             }
         }
         this.categoryPersistencePort.updateCategory(category);
