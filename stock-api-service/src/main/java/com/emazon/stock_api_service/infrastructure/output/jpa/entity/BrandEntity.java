@@ -22,6 +22,7 @@ public class BrandEntity {
     private String name;
     private String description;
 
-    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,orphanRemoval = true)
+//    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST,orphanRemoval = true)
+    @OneToMany(mappedBy = "brand", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<ArticleEntity> articles;
 }
