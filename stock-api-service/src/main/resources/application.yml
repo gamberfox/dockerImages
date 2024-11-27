@@ -18,6 +18,6 @@ spring:
         
 #        dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
-#cors:
-#  allowed:
-#    origin: ${CORS_URL:http://localhost:4200}
+cors:
+  allowed:
+    origin: ${CORS_URL:http://localhost:4200}
