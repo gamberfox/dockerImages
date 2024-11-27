@@ -38,7 +38,7 @@ spec:
       #     command: ['sh', '-c', 'until nc -z mysql-service 3306; do echo waiting for MySQL service; sleep 5; done;'] # Loop until service is available
       containers:
         - name: mysql
-          image: mysql:8
+          image: mysql:8.0
           ports:
             - containerPort: 3306
 
@@ -120,6 +120,8 @@ spec:
               value: root
             - name: DB_PASSWORD
               value: root
+            - name: CORS_URL
+              value: http://localhost:4200
           # readinessProbe: # Readiness probe ensures the pod only becomes ready when the service is available
           #   httpGet:
           #     path: /health # Replace with the appropriate health check path for your app

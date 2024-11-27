@@ -10,6 +10,7 @@ WORKDIR /stock-api-service
 ENV DB_URL=jdbc:mysql://mysql-container:3306/stock
 ENV DB_USERNAME=root
 ENV DB_PASSWORD=root
+ENV CORS_URL=http://localhost:4200
 
 # Copy the JAR file built by Maven or Gradle into the container
 COPY stock-api-service/build/libs/stock-api-service-0.0.1-SNAPSHOT.jar /app/app.jar
