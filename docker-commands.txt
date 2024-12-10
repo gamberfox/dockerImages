@@ -8,7 +8,6 @@ docker push gamberfox/stock-ms
 docker tag gamberfox/stock-ms gamberfox/stock-ms:1.01
 
 
-
 #### build the jar
 ./stock-api-service/gradlew build
 
