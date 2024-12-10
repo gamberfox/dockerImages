@@ -1,0 +1,11 @@
+
+
+##########THIS WILL LOG EVERYTHING
+
+kubectl apply -f elastic-d.yaml
+
+kubectl apply -f kibana-d.yaml
+
+kubectl apply -f fluent-d.yaml
+
+
