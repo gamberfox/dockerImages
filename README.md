@@ -16,6 +16,10 @@ cd sd3-group4-ms-stock
 kubectl.exe apply -f stock-deployment.yaml
 ```
 
+```bash
+minikube.exe service mysql-service
+```
+
 ## HTTP request documentation
 
 ```bash
