@@ -4,7 +4,14 @@ upload docker images here
 
 # deploy microservice in kubernetes
 
-after downloading the repository, execute this command
+
+
+```bash
+git clone https://github.com/gamberfox/sd3-group4-ms-stock.git
+```
+```bash
+cd sd3-group4-ms-stock
+```
 ```bash
 kubectl.exe apply -f stock-deployment.yaml
 ```
