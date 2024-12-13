@@ -108,6 +108,12 @@ spec:
           # image: ghcr.io/gamberfox/sd3-group4-ms-stock/stock-ms:latest
           image: gamberfox/stock-ms:1.08
           # k8s is not pulling the correct image, it seems it's caching
+          volumeMounts:
+            - name: filebeat-config-volume
+              mountPath: /usr/share/filebeat/filebeat.yml
+              subPath: filebeat.yml
+            - name: log-volume
+              mountPath: /var/log/filebeat
           imagePullPolicy: Always
           ports:
             - containerPort: 8090
@@ -129,3 +135,9 @@ spec:
           #   initialDelaySeconds: 15 # Wait for 10 seconds before checking readiness
           #   periodSeconds: 10 # Check every 5 seconds
           #   failureThreshold: 4 # Fail if 3 consecutive checks fail
+      volumes:
+        - name: filebeat-config-volume
+          configMap:
+            name: filebeat-config
+        - name: log-volume
+          emptyDir: {} # This creates an empty directory to store logs

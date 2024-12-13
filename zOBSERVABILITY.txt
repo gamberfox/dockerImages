@@ -2,10 +2,35 @@
 
 ##########THIS WILL LOG EVERYTHING
 
-kubectl apply -f elastic-d.yaml
 
-kubectl apply -f kibana-d.yaml
+kubectl.exe apply -f filter-stock.yaml
+kubectl get configmaps
 
-kubectl apply -f fluent-d.yaml
+kubectl describe configmap <configmap-name> -n <namespace> --watch
+kubectl describe configmap filebeat-config --watch
+
+kubectl get configmap filebeat-config -o yaml
 
 
+
+kubectl exec -it <pod-name> -- cat /usr/share/filebeat/filebeat.yml
+stock-d-6fb5bc9f94-qxmmh
+kubectl exec -it stock-d-6fb5bc9f94-qxmmh -- cat /usr/share/filebeat/filebeat.yml
+
+
+kubectl rollout restart deployment stock-d
+
+kubectl exec -it stock-d-d84967b55-6gvkp -- cat /usr/share/filebeat/filebeat.yml
+
+
+
+kubectl exec -it stock-d-b979b4c74-xvxz8 -- /bin/sh
+cd ../usr/share/filebeat
+
+kubectl logs stock-d-b979b4c74-xvxz8 -c filebeat
+
+
+
+-------------------------------------------------------
+
+kubectl apply -f elasticsearch-deployment.yaml
