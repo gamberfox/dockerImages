@@ -1,0 +1,12 @@
+
+
+
+
+
+kubectl apply -f fluen.yaml
+
+-----------------------------------------------------------
+kubectl get daemonset fluent-bit -n kube-system
+
+kubectl get pods -l k8s-app=fluent-bit -n kube-system
+kubectl.exe logs fluent-bit-2tk6h -n kube-system

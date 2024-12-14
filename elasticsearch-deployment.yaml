@@ -19,15 +19,29 @@ spec:
           env:
             - name: discovery.type
               value: single-node # Set this for single-node deployment
+            - name: xpack.security.enabled
+              value: "false" # Disable security features
+
           ports:
             - containerPort: 9200
               name: http
           volumeMounts:
             - name: data
               mountPath: /usr/share/elasticsearch/data
+        - name: metricbeat
+          image: docker.elastic.co/beats/metricbeat:8.10.0
+          env:
+            - name: ELASTICSEARCH_HOST
+              value: "http://localhost:9200"
+          volumeMounts:
+            - name: metricbeat-config
+              mountPath: /etc/metricbeat
       volumes:
         - name: data
           emptyDir: {}
+        - name: metricbeat-config
+          configMap:
+            name: metricbeat-config
 ---
 apiVersion: v1
 kind: Service

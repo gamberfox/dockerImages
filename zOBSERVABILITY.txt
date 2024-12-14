@@ -26,11 +26,28 @@ kubectl exec -it stock-d-d84967b55-6gvkp -- cat /usr/share/filebeat/filebeat.yml
 
 kubectl exec -it stock-d-b979b4c74-xvxz8 -- /bin/sh
 cd ../usr/share/filebeat
+cd ../var/log/filebeat
+ls -al
 
 kubectl logs stock-d-b979b4c74-xvxz8 -c filebeat
 
+kubectl exec -it elasticsearch-86d64cdd67-twzrd -- /bin/sh
 
 
 -------------------------------------------------------
 
 kubectl apply -f elasticsearch-deployment.yaml
+
+
+kubectl port-forward service/elasticsearch 9200:9200
+
+-------------------------------------------------------
+-------------------------------------------------------
+
+
+kubectl apply -f kibana-deployment.yaml
+
+kubectl port-forward service/kibana 5601:5601
+
+
+--------------------------------------------------
