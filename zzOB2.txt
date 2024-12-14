@@ -3,10 +3,13 @@
 
 
 
-kubectl apply -f fluen.yaml
+kubectl apply -f elastic.yaml
+kubectl apply -f kibana.yaml
+kubectl apply -f logstash.yaml  
+# Skip this if you don't want Logstash
 
 -----------------------------------------------------------
 kubectl get daemonset fluent-bit -n kube-system
-
 kubectl get pods -l k8s-app=fluent-bit -n kube-system
+
 kubectl.exe logs fluent-bit-2tk6h -n kube-system
