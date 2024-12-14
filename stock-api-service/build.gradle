@@ -35,6 +35,8 @@ dependencies {
 	implementation 'com.h2database:h2:2.2.222'
 	implementation 'org.junit.jupiter:junit-jupiter:5.11.0'
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
+	implementation 'org.springframework.boot:spring-boot-starter-logging' // Default logging (Logback)
+	implementation 'net.logstash.logback:logstash-logback-encoder:7.4' // Logstash encoder for Logback
 	compileOnly 'org.projectlombok:lombok:1.18.28'
 	runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'
